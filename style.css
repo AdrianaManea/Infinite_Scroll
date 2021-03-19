@@ -79,7 +79,7 @@ h1 {
   padding: 7px 10px;
 }
 
-.loader {
+.loading {
   opacity: 0;
   display: flex;
   position: fixed;
