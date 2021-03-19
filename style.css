@@ -36,6 +36,7 @@ h1 {
 .filter {
   width: 100%;
   padding: 12px;
+  font-size: 16px;
 }
 
 .post {
@@ -46,7 +47,7 @@ h1 {
   padding: 20px;
   margin: 40px 0;
   display: flex;
-  width: 80vh;
+  width: 80vw;
   max-width: 800px;
 }
 
@@ -87,7 +88,7 @@ h1 {
   transition: opacity 0.3s ease-in;
 }
 
-.loader.show {
+.loading.show {
   opacity: 1;
 }
 

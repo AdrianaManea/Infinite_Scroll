@@ -2,8 +2,9 @@ const postsContainer = document.getElementById('posts-container');
 const loading = document.getElementById('loading');
 const filter = document.getElementById('filter');
 
-let limit = 3;
+let limit = 5;
 let page = 1;
+let isLoading = false;
 
 // Fetch posts from API
 async function getPosts() {
@@ -34,5 +35,38 @@ async function showPosts() {
   });
 }
 
+// Show 'loading' & Fetch the rest of the posts
+async function showLoading() {
+  if (isLoading) {
+    return;
+  }
+
+  page++;
+  isLoading = true;
+  loading.classList.add('show');
+
+  await showPosts(); // important
+
+  isLoading = false; // only then do we enable further loading
+  loading.classList.remove('show'); // and remove the loader
+
+}
+
+
 // Show initial posts
 showPosts();
+
+window.addEventListener('scroll', () => {
+  const {
+    scrollTop,
+    scrollHeight,
+    clientHeight
+  } = document.documentElement;
+
+  if (scrollTop + clientHeight >= scrollHeight - 5) {
+    // console.log(123);
+
+    // Show 'loading' & Fetch the rest of the posts
+    showLoading();
+  }
+});
