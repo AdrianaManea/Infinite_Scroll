@@ -2,7 +2,7 @@ const postsContainer = document.getElementById('posts-container');
 const loading = document.getElementById('loading');
 const filter = document.getElementById('filter');
 
-let limit = 5;
+let limit = 7;
 let page = 1;
 let isLoading = false;
 
@@ -52,6 +52,24 @@ async function showLoading() {
 
 }
 
+// Filter posts by input
+function filterPosts(e) {
+  const term = e.target.value.toUpperCase();
+  // posts gives a NodeList which basically Array
+  const posts = document.querySelectorAll('.post');
+
+  posts.forEach(post => {
+    const title = post.querySelector('.post-title').innerText.toUpperCase();
+    const body = post.querySelector('.post-body').innerText.toUpperCase();
+
+    if (title.indexOf(term) > -1 || body.indexOf(term) > -1) {
+      post.style.display = 'flex';
+    } else {
+      post.style.display = 'none';
+    }
+
+  });
+}
 
 // Show initial posts
 showPosts();
@@ -70,3 +88,6 @@ window.addEventListener('scroll', () => {
     showLoading();
   }
 });
+
+
+filter.addEventListener('input', filterPosts);
